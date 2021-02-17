@@ -1,0 +1,33 @@
+html,
+body,
+#map {
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
+
+
+.btn-add-layer {
+  border-radius: 32px;
+  width: 64px;
+  height: 64px;
+  background: white;
+  border: 1px solid #cccccc;
+  font-size: 48px;
+  position: absolute;
+  right: 20px;
+  bottom: 40px;
+}
+
+.layer-amount {
+  width: 400px;
+  bottom: 40px;
+  position: absolute;
+  background: white;
+  left: calc(50% - 200px);
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
