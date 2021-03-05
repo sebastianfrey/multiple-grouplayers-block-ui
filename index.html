@@ -4,17 +4,24 @@
         <title>FeatureLayer Rendering Issue</title>
         <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
         <script src="https://js.arcgis.com/4.18/"></script>
-        <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/themes/light/main.css"/>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css"/>
         <link rel="stylesheet" href="./index.css" />
     </head>
     <body>
-        <div id="map"></div>
-        <button id="btn-add-layer" class="btn-add-layer">+</button>
-        <div class="layer-amount">
-            <label>Layers</label>
-            <div id="layer-amount"></div>
+        <div id="map">
+            <div class="ui" id="ui">
+                <div class="widget">
+                    <div class="row gutter-bottom">
+                        <label class="bold">Create x deep nested GroupLayer structures</label>
+                    </div>
+                    <div class="row center">
+                        <label>Layers</label>
+                        <div id="slider"></div>
+                        <button id="generate" class="btn-generate">GENERATE</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <script src="./index.js"></script>
-
 </html>

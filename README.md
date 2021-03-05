@@ -1,24 +1,8 @@
-# Rendering issue with Client-Side FeatureLayer
+# UI blocking with deep nested GroupLayer's
 
-This repository contains a sample Application, which demonstrates an issue when creating multiple FeatureLayers from client-side Graphics. The issue let the browser gobble a huge amount of memory (Up to 2GB and more). After a while this causes a cras of the browser tab.
+This repository contains a sample Application, which demonstrates an issue causing the UI to block when multiple layers are loaded lazy in a deep nested hierarchical structure.
 
 ## How to reproduce?
-The following application reproduces the previously described issue:
+The application in this repository provides an example how to reproduce the previously described issue:
 
-After the applications MapView is ready, two GroupLayers are created and added to the map, where each GroupLayer contains:
-
-  - 1 client-side FeatureLayer
-  - 1 GroupLayer with 10 client-side FeatureLayers as children
-
-Each client-side FeatureLayer contains initially one random Polygon.
-
-Everytime the MapView goes `stationary` for every FeatureLayer a completely new random Polygon is generated and applied to the source using [FeatureLayer#applyEdits()](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#applyEdits). All previous polygons are deleted in the same step. This means there are in total 42 features to render.
-
-## Further assets
-The following video demonstrates the issue:
-
-![](./assets/demo.gif)
-
-As we can see at the beginning everything works as expected, but after a little bit of paning and zooming around, the application starts acting laggy and buggy. For example, the FeatureLayers do not draw the updates anymore.
-
-A running version of the sample application in the above video can be found here https://sebastianfrey.github.io/client-side-featurelayer-issue/.
+Therefore a root GroupLayer is cretated, when the applications MapView is ready. By clicking the `GENERATE` Button, `x` GroupLayers are created, where each created GroupLayer is created with an identical hierarchical structure, which consists of GroupLayers and Client-Side-FeatureLayers. The creation of each layer is created asynchronously. `x`, the number of GroupLayers to create, can be controlled by a Slider. With increasing `x` the UI blocks more heavily. With decreasing `x` the UI blocks less, but it blocks noticable.

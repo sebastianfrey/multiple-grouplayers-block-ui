@@ -127,10 +127,8 @@ require([
     // Add widget to the top right corner of the view
     view.ui.add(layerList, "top-right");
 
-    const sliderContainer = document.createElement("div");
-
     const slider = new Slider({
-      container: 'layer-amount',
+      container: 'slider',
       min: 1,
       max: 10,
       values: [ 5 ],
@@ -141,21 +139,16 @@ require([
         rangeLabels: true
       }
     });
-    view.ui.add(sliderContainer, "bottom-center");
 
     const root = new GroupLayer({
-      title: 'Root',
-      layers: createFeatureLayers(view, { total: 2, title: 'FeatureLayer Root', color: [51, 51, 204, 0.9] }),
+      title: 'Root'
     });
-    root.layers.on('change', () => console.info('Root change 1'));
-    root.layers.on('change', () => console.info('Root change 2'));
-    root.layers.on('change', () => console.info('Root change 3'));
 
     map.layers.add(root);
 
     let count = 1;
 
-    const btn = document.getElementById('btn-add-layer');
+    const btn = document.getElementById('generate');
     btn.addEventListener('click', () => {
       function createGroup() {
         let cnt = count;
@@ -180,26 +173,16 @@ require([
               ]);
             }, randomInt(200, 1000));
 
-            // layer.layers.on('change', () => console.info(`Group C ${cnt} change 1`));
-            // layer.layers.on('change', () => console.info(`Group C ${cnt} change 2`));
-            // layer.layers.on('change', () => console.info(`Group C ${cnt} change 3`));
-
             return layer;
           }),
         ];
 
         const groupB = new GroupLayer({ title: `Group B ${cnt}` });
-        // groupB.layers.on('change', () => console.info(`Group B ${cnt} change 1`));
-        // groupB.layers.on('change', () => console.info(`Group B ${cnt} change 2`));
-        // groupB.layers.on('change', () => console.info(`Group B ${cnt} change 3`));
         setTimeout(() => {
           groupB.addMany(groupC);
         }, randomInt(200, 1000));
 
         const groupA = new GroupLayer({ title: `Group A ${cnt}` });
-        // groupA.layers.on('change', () => console.info(`Group A change 1`));
-        // groupA.layers.on('change', () => console.info(`Group A change 2`));
-        // groupA.layers.on('change', () => console.info(`Group A change 3`));
 
         setTimeout(() => {
           groupA.addMany([
@@ -227,5 +210,12 @@ require([
     });
 
     console.info('App is ready!', { map, view });
+
+    const ui = document.getElementById("ui");
+
+    view.whenLayerView(root).then(() => {
+      view.ui.add(ui, "bottom-center")
+      ui.classList.add("loaded");
+    });
   });
 });
