@@ -1,8 +1,6 @@
 # UI blocking with deep nested GroupLayer's
 
-This repository contains a sample Application, which demonstrates an issue causing the UI to block when multiple layers are loaded lazy in a deep nested hierarchical structure.
-
-
+This repository contains a sample Application, which demonstrates an issue with the ArcGIS API for JS 4.x causing the UI to block when multiple layers are loaded lazy in a deep nested hierarchical structure.
 
 ## How to reproduce?
 
